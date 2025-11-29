@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.4",
   "info": {
-    "title": "Sage Evolution API",
-    "description": "A professional API wrapper for Sage Evolution SDK.",
+    "title": "EvoConnect",
+    "description": "A modern RESTful API for Sage Evolution (formerly Pastel Evolution).",
     "contact": {
       "name": "Akwasi Adu-Kyeremeh .::. https://akwasi.dev",
       "email": "me@akwasi.dev"
