@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <link rel="icon" type="image/x-icon" href="../img/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../img/favicon/site.webmanifest">
     <title>Linux Setup - EvoConnect</title>
     <style>
         * {
@@ -10,21 +17,21 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
             color: #333;
             background: #f8f9fa;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #E95420 0%, #772953 100%);
             color: white;
             padding: 40px 20px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2rem;
             margin-bottom: 10px;
@@ -33,69 +40,70 @@
             justify-content: center;
             gap: 15px;
         }
-        
+
         .header p {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-        
+
         .breadcrumb {
             max-width: 900px;
             margin: 20px auto;
             padding: 0 20px;
             font-size: 0.9rem;
         }
-        
+
         .breadcrumb a {
             color: #E95420;
             text-decoration: none;
         }
-        
+
         .breadcrumb a:hover {
             text-decoration: underline;
         }
-        
+
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 20px;
         }
-        
+
         .card {
             background: white;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 25px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
-        
+
         .card h2 {
             color: #E95420;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f0f0f0;
         }
-        
+
         .card h3 {
             color: #333;
             margin: 25px 0 15px 0;
             font-size: 1.1rem;
         }
-        
+
         .card p {
             margin-bottom: 15px;
             color: #555;
         }
-        
-        .card ul, .card ol {
+
+        .card ul,
+        .card ol {
             margin: 15px 0 15px 25px;
             color: #555;
         }
-        
+
         .card li {
             margin-bottom: 8px;
         }
-        
+
         .code-block {
             background: #2d2d2d;
             color: #f8f8f2;
@@ -107,23 +115,23 @@
             margin: 15px 0;
             position: relative;
         }
-        
+
         .code-block .comment {
             color: #75715e;
         }
-        
+
         .code-block .keyword {
             color: #66d9ef;
         }
-        
+
         .code-block .string {
             color: #a6e22e;
         }
-        
+
         .code-block .variable {
             color: #f92672;
         }
-        
+
         .code-label {
             background: #E95420;
             color: white;
@@ -136,7 +144,7 @@
             position: relative;
             top: 8px;
         }
-        
+
         .highlight-box {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -144,22 +152,22 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
         }
-        
+
         .highlight-box.info {
             background: #d1ecf1;
             border-left-color: #17a2b8;
         }
-        
+
         .highlight-box.success {
             background: #d4edda;
             border-left-color: #28a745;
         }
-        
+
         .highlight-box.danger {
             background: #f8d7da;
             border-left-color: #dc3545;
         }
-        
+
         .step-indicator {
             display: inline-block;
             background: #E95420;
@@ -173,70 +181,70 @@
             margin-right: 10px;
             font-size: 0.9rem;
         }
-        
+
         .requirements-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             margin: 20px 0;
         }
-        
+
         .requirement-item {
             background: #f8f9fa;
             padding: 15px;
             border-radius: 8px;
             border: 1px solid #e9ecef;
         }
-        
+
         .requirement-item h4 {
             color: #E95420;
             font-size: 0.9rem;
             margin-bottom: 5px;
         }
-        
+
         .requirement-item p {
             font-size: 0.85rem;
             margin: 0;
         }
-        
+
         .toc {
             background: #f8f9fa;
             padding: 20px;
             border-radius: 8px;
             margin-bottom: 20px;
         }
-        
+
         .toc h3 {
             margin: 0 0 15px 0;
             color: #333;
         }
-        
+
         .toc ul {
             list-style: none;
             margin: 0;
             padding: 0;
         }
-        
+
         .toc li {
             margin: 8px 0;
         }
-        
+
         .toc a {
             color: #E95420;
             text-decoration: none;
         }
-        
+
         .toc a:hover {
             text-decoration: underline;
         }
-        
+
         .distro-tabs {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        
+
         .distro-tab {
             padding: 8px 16px;
             background: #e9ecef;
@@ -245,56 +253,58 @@
             cursor: pointer;
             font-size: 0.9rem;
         }
-        
+
         .distro-tab.active {
             background: #E95420;
             color: white;
         }
-        
+
         footer {
             text-align: center;
             padding: 30px 20px;
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         footer a {
             color: #E95420;
             text-decoration: none;
         }
-        
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 1.5rem;
             }
-            
+
             .card {
                 padding: 20px;
             }
-            
+
             .requirements-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <h1>
             <svg width="40" height="40" viewBox="0 0 32 32" fill="white">
-                <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 4.5c3.038 0 5.5 2.462 5.5 5.5s-2.462 5.5-5.5 5.5-5.5-2.462-5.5-5.5 2.462-5.5 5.5-5.5zm0 22.5c-4.142 0-7.5-3.358-7.5-7.5 0-2.485 1.212-4.687 3.075-6.05.825.618 1.838.987 2.925 1.025v.025c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-.025c1.087-.038 2.1-.407 2.925-1.025C22.288 14.813 23.5 17.015 23.5 19.5c0 4.142-3.358 7.5-7.5 7.5z"/>
+                <path
+                    d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0zm0 4.5c3.038 0 5.5 2.462 5.5 5.5s-2.462 5.5-5.5 5.5-5.5-2.462-5.5-5.5 2.462-5.5 5.5-5.5zm0 22.5c-4.142 0-7.5-3.358-7.5-7.5 0-2.485 1.212-4.687 3.075-6.05.825.618 1.838.987 2.925 1.025v.025c0 .828.672 1.5 1.5 1.5s1.5-.672 1.5-1.5v-.025c1.087-.038 2.1-.407 2.925-1.025C22.288 14.813 23.5 17.015 23.5 19.5c0 4.142-3.358 7.5-7.5 7.5z" />
             </svg>
             Linux Setup Guide
         </h1>
         <p>Deploy EvoConnect as a systemd service with Nginx reverse proxy</p>
     </div>
-    
+
     <div class="breadcrumb">
-        <a href="https://evolution-api.akwasi.dev">Home</a> → 
-        <a href="getting-started.html">Getting Started</a> → 
+        <a href="https://evolution-api.akwasi.dev">Home</a> →
+        <a href="getting-started.html">Getting Started</a> →
         Linux Setup
     </div>
-    
+
     <div class="container">
         <!-- Table of Contents -->
         <div class="toc">
@@ -310,11 +320,11 @@
                 <li><a href="#troubleshooting">8. Troubleshooting</a></li>
             </ul>
         </div>
-        
+
         <!-- Prerequisites -->
         <div class="card" id="prerequisites">
             <h2><span class="step-indicator">1</span> Prerequisites</h2>
-            
+
             <div class="requirements-grid">
                 <div class="requirement-item">
                     <h4>Operating System</h4>
@@ -322,7 +332,7 @@
                 </div>
                 <div class="requirement-item">
                     <h4">.NET Runtime</h4>
-                    <p>.NET 9.0 ASP.NET Core Runtime</p>
+                        <p>.NET 9.0 ASP.NET Core Runtime</p>
                 </div>
                 <div class="requirement-item">
                     <h4>SQL Server Access</h4>
@@ -333,179 +343,191 @@
                     <p>Nginx (recommended) or Apache</p>
                 </div>
             </div>
-            
+
             <div class="highlight-box info">
-                <strong>Note:</strong> EvoConnect connects to SQL Server where Sage Evolution data resides. SQL Server can be on a Windows machine on your network; the API itself runs on Linux.
+                <strong>Note:</strong> EvoConnect connects to SQL Server where Sage Evolution data resides. SQL Server
+                can be on a Windows machine on your network; the API itself runs on Linux.
             </div>
         </div>
-        
+
         <!-- Install .NET -->
         <div class="card" id="install-dotnet">
             <h2><span class="step-indicator">2</span> Install .NET 9.0 Runtime</h2>
-            
+
             <h3>Ubuntu 22.04 / 24.04</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Add Microsoft package repository</span>
-wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+                <span class="comment"># Add Microsoft package repository</span>
+                wget https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb -O
+                packages-microsoft-prod.deb
+                sudo dpkg -i packages-microsoft-prod.deb
+                rm packages-microsoft-prod.deb
 
-<span class="comment"># Install ASP.NET Core Runtime</span>
-sudo apt-get update
-sudo apt-get install -y aspnetcore-runtime-9.0
+                <span class="comment"># Install ASP.NET Core Runtime</span>
+                sudo apt-get update
+                sudo apt-get install -y aspnetcore-runtime-9.0
             </div>
-            
+
             <h3>Debian 11 / 12</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Add Microsoft package repository</span>
-wget https://packages.microsoft.com/config/debian/$(cat /etc/debian_version | cut -d. -f1)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-sudo dpkg -i packages-microsoft-prod.deb
-rm packages-microsoft-prod.deb
+                <span class="comment"># Add Microsoft package repository</span>
+                wget https://packages.microsoft.com/config/debian/$(cat /etc/debian_version | cut -d.
+                -f1)/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+                sudo dpkg -i packages-microsoft-prod.deb
+                rm packages-microsoft-prod.deb
 
-<span class="comment"># Install ASP.NET Core Runtime</span>
-sudo apt-get update
-sudo apt-get install -y aspnetcore-runtime-9.0
+                <span class="comment"># Install ASP.NET Core Runtime</span>
+                sudo apt-get update
+                sudo apt-get install -y aspnetcore-runtime-9.0
             </div>
-            
+
             <h3>RHEL / CentOS / Fedora</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Add Microsoft repository</span>
-sudo rpm -Uvh https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
+                <span class="comment"># Add Microsoft repository</span>
+                sudo rpm -Uvh https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm
 
-<span class="comment"># Install ASP.NET Core Runtime</span>
-sudo dnf install aspnetcore-runtime-9.0
+                <span class="comment"># Install ASP.NET Core Runtime</span>
+                sudo dnf install aspnetcore-runtime-9.0
             </div>
-            
+
             <h3>Verify Installation</h3>
             <div class="code-block">
-dotnet --list-runtimes
+                dotnet --list-runtimes
 
-<span class="comment"># Expected output includes:</span>
-<span class="comment"># Microsoft.AspNetCore.App 9.0.x [/usr/share/dotnet/shared/Microsoft.AspNetCore.App]</span>
-<span class="comment"># Microsoft.NETCore.App 9.0.x [/usr/share/dotnet/shared/Microsoft.NETCore.App]</span>
+                <span class="comment"># Expected output includes:</span>
+                <span class="comment"># Microsoft.AspNetCore.App 9.0.x
+                    [/usr/share/dotnet/shared/Microsoft.AspNetCore.App]</span>
+                <span class="comment"># Microsoft.NETCore.App 9.0.x
+                    [/usr/share/dotnet/shared/Microsoft.NETCore.App]</span>
             </div>
         </div>
-        
+
         <!-- Deploy Files -->
         <div class="card" id="deploy-files">
             <h2><span class="step-indicator">3</span> Deploy API Files</h2>
-            
+
             <h3>Create Application Directory</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Create directory structure</span>
-sudo mkdir -p /var/www/evoconnect
-sudo mkdir -p /var/www/evoconnect/logs
+                <span class="comment"># Create directory structure</span>
+                sudo mkdir -p /var/www/evoconnect
+                sudo mkdir -p /var/www/evoconnect/logs
 
-<span class="comment"># Create a dedicated user for the service (optional but recommended)</span>
-sudo useradd -r -s /sbin/nologin evoconnect
+                <span class="comment"># Create a dedicated user for the service (optional but recommended)</span>
+                sudo useradd -r -s /sbin/nologin evoconnect
             </div>
-            
+
             <h3>Extract and Copy Files</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Upload Published.zip to server (using scp, sftp, etc.)</span>
-<span class="comment"># scp Published.zip user@yourserver:~/</span>
+                <span class="comment"># Upload Published.zip to server (using scp, sftp, etc.)</span>
+                <span class="comment"># scp Published.zip user@yourserver:~/</span>
 
-<span class="comment"># Extract the ZIP file</span>
-unzip Published.zip -d ~/evoconnect-temp
+                <span class="comment"># Extract the ZIP file</span>
+                unzip Published.zip -d ~/evoconnect-temp
 
-<span class="comment"># Copy contents to application directory</span>
-sudo cp -r ~/evoconnect-temp/net9.0/* /var/www/evoconnect/
+                <span class="comment"># Copy contents to application directory</span>
+                sudo cp -r ~/evoconnect-temp/net9.0/* /var/www/evoconnect/
 
-<span class="comment"># Clean up</span>
-rm -rf ~/evoconnect-temp ~/Published.zip
+                <span class="comment"># Clean up</span>
+                rm -rf ~/evoconnect-temp ~/Published.zip
 
-<span class="comment"># Set ownership</span>
-sudo chown -R evoconnect:evoconnect /var/www/evoconnect
+                <span class="comment"># Set ownership</span>
+                sudo chown -R evoconnect:evoconnect /var/www/evoconnect
 
-<span class="comment"># Set permissions</span>
-sudo chmod -R 755 /var/www/evoconnect
-sudo chmod -R 775 /var/www/evoconnect/logs
+                <span class="comment"># Set permissions</span>
+                sudo chmod -R 755 /var/www/evoconnect
+                sudo chmod -R 775 /var/www/evoconnect/logs
             </div>
-            
+
             <p>Your directory structure should look like:</p>
             <div class="code-block">
-/var/www/evoconnect/
-├── appsettings.json
-├── appsettings.Development.json
-├── EvolutionSDKAPIsimp.dll
-├── EvolutionSDKAPIsimp.exe          <span class="comment"># Not used on Linux</span>
-├── EvolutionSDKAPIsimp.xml
-├── license.lic                       <span class="comment"># Add after receiving from support</span>
-├── logs/
-└── [other DLLs and folders...]
+                /var/www/evoconnect/
+                ├── appsettings.json
+                ├── appsettings.Development.json
+                ├── EvolutionSDKAPIsimp.dll
+                ├── EvolutionSDKAPIsimp.exe <span class="comment"># Not used on Linux</span>
+                ├── EvolutionSDKAPIsimp.xml
+                ├── license.lic <span class="comment"># Add after receiving from support</span>
+                ├── logs/
+                └── [other DLLs and folders...]
             </div>
         </div>
-        
+
         <!-- Configure App -->
         <div class="card" id="configure-app">
             <h2><span class="step-indicator">4</span> Configure Application Settings</h2>
-            
+
             <p>Edit the configuration file:</p>
-            
+
             <div class="code-label">Terminal</div>
             <div class="code-block">
-sudo nano /var/www/evoconnect/appsettings.json
+                sudo nano /var/www/evoconnect/appsettings.json
             </div>
-            
+
             <h3>Key Configuration Sections</h3>
             <div class="code-label">appsettings.json</div>
             <div class="code-block">
-{
-  <span class="string">"Logging"</span>: {
-    <span class="string">"LogLevel"</span>: {
-      <span class="string">"Default"</span>: <span class="string">"Information"</span>,
-      <span class="string">"Microsoft.AspNetCore"</span>: <span class="string">"Warning"</span>
-    }
-  },
-  <span class="string">"AllowedHosts"</span>: <span class="string">"*"</span>,
-  
-  <span class="comment">// CORS - Add your application domains</span>
-  <span class="string">"AllowedOrigins"</span>: [
-    <span class="string">"https://yourapplication.com"</span>
-  ],
-  
-  <span class="comment">// JWT Configuration - CHANGE THESE!</span>
-  <span class="string">"Jwt"</span>: {
-    <span class="string">"Key"</span>: <span class="string">"your-super-secret-jwt-key-minimum-32-characters"</span>,
-    <span class="string">"Issuer"</span>: <span class="string">"EvoConnect"</span>,
-    <span class="string">"Audience"</span>: <span class="string">"EvoConnectClients"</span>,
-    <span class="string">"ExpirationInMinutes"</span>: 60
-  },
-  
-  <span class="comment">// API Keys</span>
-  <span class="string">"ApiKeys"</span>: [
-    <span class="string">"your-secure-api-key-here"</span>
-  ],
-  
-  <span class="comment">// SQL Server connection (Windows SQL Server on network)</span>
-  <span class="string">"Companies"</span>: {
-    <span class="string">"company1"</span>: {
-      <span class="string">"DisplayName"</span>: <span class="string">"My Company Ltd"</span>,
-      <span class="string">"EvolutionDatabase"</span>: <span class="string">"Server=192.168.1.100;Database=Evolution_Company;User Id=sa;Password=YourPassword;TrustServerCertificate=True;"</span>,
-      <span class="string">"EvolutionCommon"</span>: <span class="string">"Server=192.168.1.100;Database=SageCommon;User Id=sa;Password=YourPassword;TrustServerCertificate=True;"</span>
-    }
-  },
-  
-  <span class="string">"Evolution"</span>: {
-    <span class="string">"DefaultCompany"</span>: <span class="string">"company1"</span>
-  },
-  
-  <span class="string">"Features"</span>: {
-    <span class="string">"EnableSwagger"</span>: true,
-    <span class="string">"EnableDetailedErrors"</span>: false
-  }
-}
+                {
+                <span class="string">"Logging"</span>: {
+                <span class="string">"LogLevel"</span>: {
+                <span class="string">"Default"</span>: <span class="string">"Information"</span>,
+                <span class="string">"Microsoft.AspNetCore"</span>: <span class="string">"Warning"</span>
+                }
+                },
+                <span class="string">"AllowedHosts"</span>: <span class="string">"*"</span>,
+
+                <span class="comment">// CORS - Add your application domains</span>
+                <span class="string">"AllowedOrigins"</span>: [
+                <span class="string">"https://yourapplication.com"</span>
+                ],
+
+                <span class="comment">// JWT Configuration - CHANGE THESE!</span>
+                <span class="string">"Jwt"</span>: {
+                <span class="string">"Key"</span>: <span
+                    class="string">"your-super-secret-jwt-key-minimum-32-characters"</span>,
+                <span class="string">"Issuer"</span>: <span class="string">"EvoConnect"</span>,
+                <span class="string">"Audience"</span>: <span class="string">"EvoConnectClients"</span>,
+                <span class="string">"ExpirationInMinutes"</span>: 60
+                },
+
+                <span class="comment">// API Keys</span>
+                <span class="string">"ApiKeys"</span>: [
+                <span class="string">"your-secure-api-key-here"</span>
+                ],
+
+                <span class="comment">// SQL Server connection (Windows SQL Server on network)</span>
+                <span class="string">"Companies"</span>: {
+                <span class="string">"company1"</span>: {
+                <span class="string">"DisplayName"</span>: <span class="string">"My Company Ltd"</span>,
+                <span class="string">"EvolutionDatabase"</span>: <span
+                    class="string">"Server=192.168.1.100;Database=Evolution_Company;User
+                    Id=sa;Password=YourPassword;TrustServerCertificate=True;"</span>,
+                <span class="string">"EvolutionCommon"</span>: <span
+                    class="string">"Server=192.168.1.100;Database=SageCommon;User
+                    Id=sa;Password=YourPassword;TrustServerCertificate=True;"</span>
+                }
+                },
+
+                <span class="string">"Evolution"</span>: {
+                <span class="string">"DefaultCompany"</span>: <span class="string">"company1"</span>
+                },
+
+                <span class="string">"Features"</span>: {
+                <span class="string">"EnableSwagger"</span>: true,
+                <span class="string">"EnableDetailedErrors"</span>: false
+                }
+                }
             </div>
-            
+
             <div class="highlight-box">
-                <strong>SQL Server Connection from Linux:</strong> Use SQL Server Authentication (User Id/Password) when connecting from Linux. Windows Authentication (Trusted_Connection) typically doesn't work from Linux without complex Kerberos setup.
+                <strong>SQL Server Connection from Linux:</strong> Use SQL Server Authentication (User Id/Password) when
+                connecting from Linux. Windows Authentication (Trusted_Connection) typically doesn't work from Linux
+                without complex Kerberos setup.
             </div>
-            
+
             <h3>SQL Server Network Configuration</h3>
             <p>Ensure SQL Server allows remote connections:</p>
             <ol>
@@ -513,258 +535,262 @@ sudo nano /var/www/evoconnect/appsettings.json
                 <li>SQL Server port (default 1433) must be accessible from the Linux server</li>
                 <li>Windows Firewall on SQL Server must allow inbound connections on port 1433</li>
             </ol>
-            
+
             <p>Test connectivity from Linux:</p>
             <div class="code-block">
-<span class="comment"># Install SQL Server tools (optional, for testing)</span>
-curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee /etc/apt/sources.list.d/msprod.list
-sudo apt-get update
-sudo apt-get install mssql-tools unixodbc-dev
+                <span class="comment"># Install SQL Server tools (optional, for testing)</span>
+                curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+                curl https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/prod.list | sudo tee
+                /etc/apt/sources.list.d/msprod.list
+                sudo apt-get update
+                sudo apt-get install mssql-tools unixodbc-dev
 
-<span class="comment"># Test connection</span>
-/opt/mssql-tools/bin/sqlcmd -S 192.168.1.100 -U sa -P 'YourPassword' -Q "SELECT @@VERSION"
+                <span class="comment"># Test connection</span>
+                /opt/mssql-tools/bin/sqlcmd -S 192.168.1.100 -U sa -P 'YourPassword' -Q "SELECT @@VERSION"
             </div>
         </div>
-        
+
         <!-- Create systemd Service -->
         <div class="card" id="create-service">
             <h2><span class="step-indicator">5</span> Create systemd Service</h2>
-            
+
             <p>Create a systemd service to run EvoConnect as a daemon that starts automatically on boot.</p>
-            
+
             <div class="code-label">Terminal</div>
             <div class="code-block">
-sudo nano /etc/systemd/system/evoconnect.service
+                sudo nano /etc/systemd/system/evoconnect.service
             </div>
-            
+
             <p>Add the following content:</p>
-            
+
             <div class="code-label">evoconnect.service</div>
             <div class="code-block">
-[Unit]
-Description=EvoConnect - Sage Evolution REST API
-After=network.target
+                [Unit]
+                Description=EvoConnect - Sage Evolution REST API
+                After=network.target
 
-[Service]
-Type=notify
-User=evoconnect
-Group=evoconnect
-WorkingDirectory=/var/www/evoconnect
-ExecStart=/usr/bin/dotnet /var/www/evoconnect/EvolutionSDKAPIsimp.dll
-Restart=always
-RestartSec=10
-KillSignal=SIGINT
-SyslogIdentifier=evoconnect
+                [Service]
+                Type=notify
+                User=evoconnect
+                Group=evoconnect
+                WorkingDirectory=/var/www/evoconnect
+                ExecStart=/usr/bin/dotnet /var/www/evoconnect/EvolutionSDKAPIsimp.dll
+                Restart=always
+                RestartSec=10
+                KillSignal=SIGINT
+                SyslogIdentifier=evoconnect
 
-<span class="comment"># Environment variables</span>
-Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=ASPNETCORE_URLS=http://localhost:5000
-Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+                <span class="comment"># Environment variables</span>
+                Environment=ASPNETCORE_ENVIRONMENT=Production
+                Environment=ASPNETCORE_URLS=http://localhost:5000
+                Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 
-<span class="comment"># Security hardening (optional)</span>
-NoNewPrivileges=true
-PrivateTmp=true
+                <span class="comment"># Security hardening (optional)</span>
+                NoNewPrivileges=true
+                PrivateTmp=true
 
-[Install]
-WantedBy=multi-user.target
+                [Install]
+                WantedBy=multi-user.target
             </div>
-            
+
             <h3>Enable and Start the Service</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Reload systemd to recognize new service</span>
-sudo systemctl daemon-reload
+                <span class="comment"># Reload systemd to recognize new service</span>
+                sudo systemctl daemon-reload
 
-<span class="comment"># Enable service to start on boot</span>
-sudo systemctl enable evoconnect
+                <span class="comment"># Enable service to start on boot</span>
+                sudo systemctl enable evoconnect
 
-<span class="comment"># Start the service</span>
-sudo systemctl start evoconnect
+                <span class="comment"># Start the service</span>
+                sudo systemctl start evoconnect
 
-<span class="comment"># Check status</span>
-sudo systemctl status evoconnect
+                <span class="comment"># Check status</span>
+                sudo systemctl status evoconnect
             </div>
-            
+
             <h3>Useful Service Commands</h3>
             <div class="code-block">
-<span class="comment"># Stop the service</span>
-sudo systemctl stop evoconnect
+                <span class="comment"># Stop the service</span>
+                sudo systemctl stop evoconnect
 
-<span class="comment"># Restart the service</span>
-sudo systemctl restart evoconnect
+                <span class="comment"># Restart the service</span>
+                sudo systemctl restart evoconnect
 
-<span class="comment"># View logs</span>
-sudo journalctl -u evoconnect -f
+                <span class="comment"># View logs</span>
+                sudo journalctl -u evoconnect -f
 
-<span class="comment"># View last 100 log entries</span>
-sudo journalctl -u evoconnect -n 100
+                <span class="comment"># View last 100 log entries</span>
+                sudo journalctl -u evoconnect -n 100
             </div>
-            
+
             <div class="highlight-box success">
-                <strong>Test locally:</strong> At this point, the API should be running on <code>http://localhost:5000</code>. Test with: <code>curl http://localhost:5000/api/v1/license/machine-id</code>
+                <strong>Test locally:</strong> At this point, the API should be running on
+                <code>http://localhost:5000</code>. Test with:
+                <code>curl http://localhost:5000/api/v1/license/machine-id</code>
             </div>
         </div>
-        
+
         <!-- Configure Nginx -->
         <div class="card" id="configure-nginx">
             <h2><span class="step-indicator">6</span> Configure Nginx (Reverse Proxy)</h2>
-            
+
             <p>Nginx acts as a reverse proxy, handling HTTPS termination and forwarding requests to Kestrel.</p>
-            
+
             <h3>Install Nginx</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Ubuntu/Debian</span>
-sudo apt-get install nginx
+                <span class="comment"># Ubuntu/Debian</span>
+                sudo apt-get install nginx
 
-<span class="comment"># RHEL/CentOS</span>
-sudo dnf install nginx
+                <span class="comment"># RHEL/CentOS</span>
+                sudo dnf install nginx
             </div>
-            
+
             <h3>Create Nginx Configuration</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-sudo nano /etc/nginx/sites-available/evoconnect
+                sudo nano /etc/nginx/sites-available/evoconnect
             </div>
-            
+
             <div class="code-label">evoconnect (nginx config)</div>
             <div class="code-block">
-server {
-    listen 80;
-    server_name api.yourdomain.com;  <span class="comment"># Change to your domain or IP</span>
+                server {
+                listen 80;
+                server_name api.yourdomain.com; <span class="comment"># Change to your domain or IP</span>
 
-    location / {
-        proxy_pass http://localhost:5000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection keep-alive;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-        proxy_cache_bypass $http_upgrade;
-        
-        <span class="comment"># Timeout settings for long-running requests</span>
-        proxy_connect_timeout 60s;
-        proxy_send_timeout 60s;
-        proxy_read_timeout 60s;
-    }
-}
+                location / {
+                proxy_pass http://localhost:5000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection keep-alive;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_cache_bypass $http_upgrade;
+
+                <span class="comment"># Timeout settings for long-running requests</span>
+                proxy_connect_timeout 60s;
+                proxy_send_timeout 60s;
+                proxy_read_timeout 60s;
+                }
+                }
             </div>
-            
+
             <h3>Enable the Site</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Create symbolic link to enable site</span>
-sudo ln -s /etc/nginx/sites-available/evoconnect /etc/nginx/sites-enabled/
+                <span class="comment"># Create symbolic link to enable site</span>
+                sudo ln -s /etc/nginx/sites-available/evoconnect /etc/nginx/sites-enabled/
 
-<span class="comment"># Test nginx configuration</span>
-sudo nginx -t
+                <span class="comment"># Test nginx configuration</span>
+                sudo nginx -t
 
-<span class="comment"># Reload nginx</span>
-sudo systemctl reload nginx
+                <span class="comment"># Reload nginx</span>
+                sudo systemctl reload nginx
             </div>
-            
+
             <h3>Optional: Enable HTTPS with Let's Encrypt</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Install Certbot</span>
-sudo apt-get install certbot python3-certbot-nginx
+                <span class="comment"># Install Certbot</span>
+                sudo apt-get install certbot python3-certbot-nginx
 
-<span class="comment"># Obtain SSL certificate (follow prompts)</span>
-sudo certbot --nginx -d api.yourdomain.com
+                <span class="comment"># Obtain SSL certificate (follow prompts)</span>
+                sudo certbot --nginx -d api.yourdomain.com
 
-<span class="comment"># Auto-renewal is set up automatically</span>
-<span class="comment"># Test renewal with:</span>
-sudo certbot renew --dry-run
+                <span class="comment"># Auto-renewal is set up automatically</span>
+                <span class="comment"># Test renewal with:</span>
+                sudo certbot renew --dry-run
             </div>
-            
+
             <h3>Firewall Configuration</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># UFW (Ubuntu/Debian)</span>
-sudo ufw allow 'Nginx Full'
-sudo ufw allow ssh
-sudo ufw enable
+                <span class="comment"># UFW (Ubuntu/Debian)</span>
+                sudo ufw allow 'Nginx Full'
+                sudo ufw allow ssh
+                sudo ufw enable
 
-<span class="comment"># Or allow specific ports</span>
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+                <span class="comment"># Or allow specific ports</span>
+                sudo ufw allow 80/tcp
+                sudo ufw allow 443/tcp
             </div>
         </div>
-        
+
         <!-- Test Installation -->
         <div class="card" id="test">
             <h2><span class="step-indicator">7</span> Test the Installation</h2>
-            
+
             <h3>Test Endpoints</h3>
             <div class="code-label">Terminal</div>
             <div class="code-block">
-<span class="comment"># Test via Nginx (external)</span>
-curl http://api.yourdomain.com/api/v1/license/machine-id
+                <span class="comment"># Test via Nginx (external)</span>
+                curl http://api.yourdomain.com/api/v1/license/machine-id
 
-<span class="comment"># Or using IP address</span>
-curl http://YOUR_SERVER_IP/api/v1/license/machine-id
+                <span class="comment"># Or using IP address</span>
+                curl http://YOUR_SERVER_IP/api/v1/license/machine-id
 
-<span class="comment"># Test Swagger UI</span>
-<span class="comment"># Open in browser: http://api.yourdomain.com/swagger</span>
+                <span class="comment"># Test Swagger UI</span>
+                <span class="comment"># Open in browser: http://api.yourdomain.com/swagger</span>
             </div>
-            
+
             <h3>Expected Response</h3>
             <div class="code-block">
-{
-  "machineId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-  "status": "awaiting_activation"
-}
+                {
+                "machineId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                "status": "awaiting_activation"
+                }
             </div>
-            
+
             <div class="highlight-box success">
-                <strong>Success!</strong> Copy your Machine ID and proceed to <a href="https://evolution-api.akwasi.dev/getting-started#step-4">request your license</a>.
+                <strong>Success!</strong> Copy your Machine ID and proceed to <a
+                    href="https://evolution-api.akwasi.dev/getting-started#step-4">request your license</a>.
             </div>
-            
+
             <h3>Activate Your License</h3>
             <p>After receiving your <code>license.lic</code> file:</p>
             <div class="code-block">
-<span class="comment"># Copy license file to application directory</span>
-sudo cp license.lic /var/www/evoconnect/
-sudo chown evoconnect:evoconnect /var/www/evoconnect/license.lic
+                <span class="comment"># Copy license file to application directory</span>
+                sudo cp license.lic /var/www/evoconnect/
+                sudo chown evoconnect:evoconnect /var/www/evoconnect/license.lic
 
-<span class="comment"># Option 1: Reload license via API</span>
-curl -X POST http://localhost:5000/api/v1/license/reload
+                <span class="comment"># Option 1: Reload license via API</span>
+                curl -X POST http://localhost:5000/api/v1/license/reload
 
-<span class="comment"># Option 2: Restart the service</span>
-sudo systemctl restart evoconnect
+                <span class="comment"># Option 2: Restart the service</span>
+                sudo systemctl restart evoconnect
             </div>
         </div>
-        
+
         <!-- Troubleshooting -->
         <div class="card" id="troubleshooting">
             <h2><span class="step-indicator">8</span> Troubleshooting</h2>
-            
+
             <h3>Service Won't Start</h3>
             <div class="code-block">
-<span class="comment"># Check service status</span>
-sudo systemctl status evoconnect
+                <span class="comment"># Check service status</span>
+                sudo systemctl status evoconnect
 
-<span class="comment"># View detailed logs</span>
-sudo journalctl -u evoconnect -n 100 --no-pager
+                <span class="comment"># View detailed logs</span>
+                sudo journalctl -u evoconnect -n 100 --no-pager
 
-<span class="comment"># Try running manually to see errors</span>
-cd /var/www/evoconnect
-sudo -u evoconnect dotnet EvolutionSDKAPIsimp.dll
+                <span class="comment"># Try running manually to see errors</span>
+                cd /var/www/evoconnect
+                sudo -u evoconnect dotnet EvolutionSDKAPIsimp.dll
             </div>
-            
+
             <h3>Permission Denied Errors</h3>
             <div class="code-block">
-<span class="comment"># Fix ownership</span>
-sudo chown -R evoconnect:evoconnect /var/www/evoconnect
+                <span class="comment"># Fix ownership</span>
+                sudo chown -R evoconnect:evoconnect /var/www/evoconnect
 
-<span class="comment"># Fix permissions</span>
-sudo chmod -R 755 /var/www/evoconnect
-sudo chmod -R 775 /var/www/evoconnect/logs
+                <span class="comment"># Fix permissions</span>
+                sudo chmod -R 755 /var/www/evoconnect
+                sudo chmod -R 775 /var/www/evoconnect/logs
             </div>
-            
+
             <h3>Cannot Connect to SQL Server</h3>
             <ul>
                 <li>Verify SQL Server allows TCP/IP connections</li>
@@ -773,25 +799,26 @@ sudo chmod -R 775 /var/www/evoconnect/logs
                 <li>Ensure SQL Server Authentication is enabled (not just Windows Auth)</li>
                 <li>Check connection string format in appsettings.json</li>
             </ul>
-            
+
             <h3>502 Bad Gateway (Nginx)</h3>
             <ul>
                 <li>Check if EvoConnect service is running: <code>sudo systemctl status evoconnect</code></li>
                 <li>Verify the app is listening on port 5000: <code>curl http://localhost:5000/api/v1/health</code></li>
                 <li>Check Nginx error logs: <code>sudo tail -f /var/log/nginx/error.log</code></li>
             </ul>
-            
+
             <h3>Application Logs</h3>
             <div class="code-block">
-<span class="comment"># View systemd journal logs</span>
-sudo journalctl -u evoconnect -f
+                <span class="comment"># View systemd journal logs</span>
+                sudo journalctl -u evoconnect -f
 
-<span class="comment"># If file logging is enabled, check logs directory</span>
-ls -la /var/www/evoconnect/logs/
+                <span class="comment"># If file logging is enabled, check logs directory</span>
+                ls -la /var/www/evoconnect/logs/
             </div>
-            
+
             <div class="highlight-box info">
-                <strong>Need help?</strong> Email <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a> with:
+                <strong>Need help?</strong> Email <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a>
+                with:
                 <ul style="margin-top: 10px; margin-bottom: 0;">
                     <li>Output of <code>sudo journalctl -u evoconnect -n 50</code></li>
                     <li>Your Linux distribution and version</li>
@@ -799,7 +826,7 @@ ls -la /var/www/evoconnect/logs/
                 </ul>
             </div>
         </div>
-        
+
         <!-- Next Steps -->
         <div class="card">
             <h2>🚀 Next Steps</h2>
@@ -813,14 +840,15 @@ ls -la /var/www/evoconnect/logs/
             </ol>
         </div>
     </div>
-    
+
     <footer>
         <p>© 2025 Adullam Solutions Company Limited. EvoConnect is a product of Adullam Solutions.</p>
         <p style="margin-top: 10px;">
-            <a href="https://evolution-api.akwasi.dev">Home</a> · 
-            <a href="getting-started.html">Getting Started</a> · 
+            <a href="https://evolution-api.akwasi.dev">Home</a> ·
+            <a href="getting-started.html">Getting Started</a> ·
             <a href=".../docs.html">Documentation</a>
         </p>
     </footer>
 </body>
+
 </html>

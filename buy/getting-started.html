@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b1220">
+    <link rel="icon" type="image/x-icon" href="../img/favicon/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../img/favicon/site.webmanifest">
     <title>Getting Started - EvoConnect</title>
     <style>
         * {
@@ -10,31 +17,31 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
             color: #333;
             background: #f8f9fa;
         }
-        
+
         .header {
             background: linear-gradient(135deg, #2C3E50 0%, #3498db 100%);
             color: white;
             padding: 60px 20px;
             text-align: center;
         }
-        
+
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        
+
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
         }
-        
+
         .success-badge {
             display: inline-block;
             background: #27ae60;
@@ -44,21 +51,21 @@
             font-weight: 600;
             margin-bottom: 20px;
         }
-        
+
         .container {
             max-width: 800px;
             margin: 0 auto;
             padding: 40px 20px;
         }
-        
+
         .card {
             background: white;
             border-radius: 12px;
             padding: 30px;
             margin-bottom: 30px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
-        
+
         .card h2 {
             color: #2C3E50;
             margin-bottom: 20px;
@@ -66,7 +73,7 @@
             align-items: center;
             gap: 10px;
         }
-        
+
         .card h2 .step-number {
             background: #3498db;
             color: white;
@@ -78,12 +85,12 @@
             justify-content: center;
             font-size: 1rem;
         }
-        
+
         .card p {
             margin-bottom: 15px;
             color: #555;
         }
-        
+
         .code-block {
             background: #1e1e1e;
             color: #d4d4d4;
@@ -94,19 +101,19 @@
             overflow-x: auto;
             margin: 15px 0;
         }
-        
+
         .code-block .comment {
             color: #6a9955;
         }
-        
+
         .code-block .keyword {
             color: #569cd6;
         }
-        
+
         .code-block .string {
             color: #ce9178;
         }
-        
+
         .highlight-box {
             background: #fff3cd;
             border-left: 4px solid #ffc107;
@@ -114,17 +121,17 @@
             margin: 20px 0;
             border-radius: 0 8px 8px 0;
         }
-        
+
         .highlight-box.info {
             background: #d1ecf1;
             border-left-color: #17a2b8;
         }
-        
+
         .highlight-box.success {
             background: #d4edda;
             border-left-color: #28a745;
         }
-        
+
         .email-template {
             background: #f8f9fa;
             border: 1px solid #dee2e6;
@@ -132,7 +139,7 @@
             padding: 20px;
             margin: 15px 0;
         }
-        
+
         .email-template .subject {
             font-weight: 600;
             color: #2C3E50;
@@ -140,11 +147,11 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #dee2e6;
         }
-        
+
         .email-template .body {
             color: #555;
         }
-        
+
         .copy-btn {
             background: #3498db;
             color: white;
@@ -155,18 +162,18 @@
             font-size: 0.85rem;
             margin-top: 10px;
         }
-        
+
         .copy-btn:hover {
             background: #2980b9;
         }
-        
+
         .timeline {
             display: flex;
             justify-content: space-between;
             margin: 30px 0;
             position: relative;
         }
-        
+
         .timeline::before {
             content: '';
             position: absolute;
@@ -176,14 +183,14 @@
             height: 3px;
             background: #e0e0e0;
         }
-        
+
         .timeline-item {
             text-align: center;
             position: relative;
             z-index: 1;
             flex: 1;
         }
-        
+
         .timeline-item .icon {
             width: 50px;
             height: 50px;
@@ -196,17 +203,17 @@
             margin: 0 auto 10px;
             font-size: 1.2rem;
         }
-        
+
         .timeline-item.active .icon {
             background: #3498db;
             color: white;
         }
-        
+
         .timeline-item .label {
             font-size: 0.85rem;
             color: #666;
         }
-        
+
         .btn {
             display: inline-block;
             padding: 12px 24px;
@@ -215,53 +222,53 @@
             font-weight: 600;
             transition: all 0.2s;
         }
-        
+
         .btn-primary {
             background: #3498db;
             color: white;
         }
-        
+
         .btn-primary:hover {
             background: #2980b9;
         }
-        
+
         .btn-outline {
             border: 2px solid #3498db;
             color: #3498db;
             background: transparent;
         }
-        
+
         .btn-outline:hover {
             background: #3498db;
             color: white;
         }
-        
+
         .buttons {
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
             margin-top: 20px;
         }
-        
+
         .faq-item {
             border-bottom: 1px solid #eee;
             padding: 15px 0;
         }
-        
+
         .faq-item:last-child {
             border-bottom: none;
         }
-        
+
         .faq-item h4 {
             color: #2C3E50;
             margin-bottom: 8px;
         }
-        
+
         .faq-item p {
             color: #666;
             margin: 0;
         }
-        
+
         .support-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -269,50 +276,51 @@
             padding: 30px;
             text-align: center;
         }
-        
+
         .support-box h3 {
             margin-bottom: 10px;
         }
-        
+
         .support-box a {
             color: white;
             font-weight: 600;
         }
-        
+
         footer {
             text-align: center;
             padding: 40px 20px;
             color: #666;
             font-size: 0.9rem;
         }
-        
+
         @media (max-width: 600px) {
             .header h1 {
                 font-size: 1.8rem;
             }
-            
+
             .timeline {
                 flex-direction: column;
                 gap: 20px;
             }
-            
+
             .timeline::before {
                 display: none;
             }
-            
+
             .buttons {
                 flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="header">
         <span class="success-badge">✓ Purchase Complete</span>
         <h1>Welcome to EvoConnect!</h1>
         <p>Let's get your Sage Evolution API up and running</p>
     </div>
-    
+
     <div class="container">
         <!-- Progress Timeline -->
         <div class="card">
@@ -344,31 +352,34 @@
         <!-- Step 1: Download -->
         <div class="card">
             <h2><span class="step-number">1</span> Download Your Installer</h2>
-            <p>Your download should have started automatically from Selar. If not, you can use the download link below.</p>
-            
+            <p>Your download should have started automatically from Selar. If not, you can use the download link below.
+            </p>
+
             <div class="highlight-box info">
                 <strong>Didn't receive the download?</strong><br>
                 Click on the link below: <br />
-                <a href="">EvoConnect Ver 2025.12.001</a>  
+                <a href="">EvoConnect Ver 2025.12.001</a>
             </div>
 
             <p>For non-subscription clients who want to download older versions of the API, use the link below:<br />
-            <a href="previous-versions.html">Download Previous EvoConnect Versions</a></p>
+                <a href="previous-versions.html">Download Previous EvoConnect Versions</a>
+            </p>
         </div>
 
         <!-- Step 2: Install -->
         <div class="card">
             <h2><span class="step-number">2</span> Install EvoConnect</h2>
             <p>Extract the ZIP file and follow the installation instructions for your platform:</p>
-            
+
             <div class="buttons">
                 <a href="windows-setup.html" class="btn btn-outline">Windows Setup</a>
                 <a href="linux-setup.html" class="btn btn-outline">Linux Setup</a>
                 <a href="docker-setup.html" class="btn btn-outline">Docker Setup</a>
             </div>
-            
+
             <div class="highlight-box" style="margin-top: 20px;">
-                <strong>Prerequisites:</strong> Ensure you have access to your Sage Evolution database server and valid Sage Evolution credentials.
+                <strong>Prerequisites:</strong> Ensure you have access to your Sage Evolution database server and valid
+                Sage Evolution credentials.
             </div>
         </div>
 
@@ -376,24 +387,25 @@
         <div class="card">
             <h2 id="step-3"><span class="step-number">3</span> Get Your Machine ID</h2>
             <p>Once the API is running, call this endpoint to retrieve your unique Machine ID:</p>
-            
-            <div class="code-block">
-<span class="comment"># Using curl</span>
-curl http://localhost:5000/api/v1/license/machine-id
 
-<span class="comment"># Or open in your browser:</span>
-http://localhost:5000/api/v1/license/machine-id
-            </div>
-            
-            <p>You'll receive a response like this:</p>
-            
             <div class="code-block">
-{
-  <span class="string">"machineId"</span>: <span class="string">"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"</span>,
-  <span class="string">"status"</span>: <span class="string">"awaiting_activation"</span>
-}
+                <span class="comment"># Using curl</span>
+                curl http://localhost:5000/api/v1/license/machine-id
+
+                <span class="comment"># Or open in your browser:</span>
+                http://localhost:5000/api/v1/license/machine-id
             </div>
-            
+
+            <p>You'll receive a response like this:</p>
+
+            <div class="code-block">
+                {
+                <span class="string">"machineId"</span>: <span
+                    class="string">"XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"</span>,
+                <span class="string">"status"</span>: <span class="string">"awaiting_activation"</span>
+                }
+            </div>
+
             <div class="highlight-box success">
                 <strong>Copy your Machine ID</strong> - You'll need it for the next step!
             </div>
@@ -403,7 +415,7 @@ http://localhost:5000/api/v1/license/machine-id
         <div class="card">
             <h2 id="step-4"><span class="step-number">4</span> Request Your License Key</h2>
             <p>Send us your Machine ID and we'll generate your license key within 24 hours (usually much faster!).</p>
-            
+
             <div class="email-template">
                 <div class="subject">📧 To: <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a></div>
                 <div class="subject">Subject: EvoConnect License Activation</div>
@@ -411,13 +423,15 @@ http://localhost:5000/api/v1/license/machine-id
                     <p>Hi Akwasi,</p>
                     <p>Please activate my EvoConnect license.</p>
                     <p><strong>Order Email:</strong> [your email from purchase]<br>
-                    <strong>Machine ID:</strong> [paste your machine ID here]<br>
-                    <strong>License Tier:</strong> [Developer / Professional]</p>
+                        <strong>Machine ID:</strong> [paste your machine ID here]<br>
+                        <strong>License Tier:</strong> [Developer / Professional]
+                    </p>
                     <p>Thanks!</p>
                 </div>
             </div>
-            
-            <a href="mailto:support@akwasi.dev?subject=EvoConnect License Activation&body=Hi Akwasi,%0D%0A%0D%0APlease activate my EvoConnect license.%0D%0A%0D%0AOrder Email: [your email from purchase]%0D%0AMachine ID: [paste your machine ID here]%0D%0ALicense Tier: [Developer / Professional]%0D%0A%0D%0AThanks!" class="btn btn-primary">
+
+            <a href="mailto:support@akwasi.dev?subject=EvoConnect License Activation&body=Hi Akwasi,%0D%0A%0D%0APlease activate my EvoConnect license.%0D%0A%0D%0AOrder Email: [your email from purchase]%0D%0AMachine ID: [paste your machine ID here]%0D%0ALicense Tier: [Developer / Professional]%0D%0A%0D%0AThanks!"
+                class="btn btn-primary">
                 📧 Open Email Template
             </a>
         </div>
@@ -425,38 +439,45 @@ http://localhost:5000/api/v1/license/machine-id
         <!-- Step 5: Activate -->
         <div class="card">
             <h2><span class="step-number">5</span> Activate Your License</h2>
-            <p>You'll receive a <code>license.lic</code> file generated specifically for your Machine ID. Here's how to activate it:</p>
-            
-            <div class="highlight-box">
-                <strong>Step 1:</strong> Place the <code>license.lic</code> file in the root folder containing your API files (same folder as <code>EvolutionSDKAPIsimp.dll</code>).
-            </div>
-            
-            <p><strong>Step 2:</strong> Either restart the API, or call the reload endpoint to validate and apply the license without restarting:</p>
-            
-            <div class="code-block">
-<span class="comment"># Reload license without restarting the API</span>
-curl -X POST http://localhost:5000/api/v1/license/reload
+            <p>You'll receive a <code>license.lic</code> file generated specifically for your Machine ID. Here's how to
+                activate it:</p>
 
-<span class="comment"># Or if using Swagger UI, call:</span>
-POST /api/v1/license/reload
+            <div class="highlight-box">
+                <strong>Step 1:</strong> Place the <code>license.lic</code> file in the root folder containing your API
+                files (same folder as <code>EvolutionSDKAPIsimp.dll</code>).
             </div>
-            
-            <p>Successful activation response:</p>
-            
+
+            <p><strong>Step 2:</strong> Either restart the API, or call the reload endpoint to validate and apply the
+                license without restarting:</p>
+
             <div class="code-block">
-{
-  <span class="string">"status"</span>: <span class="string">"activated"</span>,
-  <span class="string">"licensedTo"</span>: <span class="string">"Your Company Name"</span>,
-  <span class="string">"tier"</span>: <span class="string">"Professional"</span>,
-  <span class="string">"modules"</span>: [<span class="string">"GL"</span>, <span class="string">"AR"</span>, <span class="string">"AP"</span>, <span class="string">"Inventory"</span>, <span class="string">"Sales"</span>, <span class="string">"Purchase"</span>, <span class="string">"CRM"</span>],
-  <span class="string">"updatesUntil"</span>: <span class="string">"2026-12-17"</span>,
-  <span class="string">"maxCompanies"</span>: 9,
-  <span class="string">"maxInstallations"</span>: 3
-}
+                <span class="comment"># Reload license without restarting the API</span>
+                curl -X POST http://localhost:5000/api/v1/license/reload
+
+                <span class="comment"># Or if using Swagger UI, call:</span>
+                POST /api/v1/license/reload
             </div>
-            
+
+            <p>Successful activation response:</p>
+
+            <div class="code-block">
+                {
+                <span class="string">"status"</span>: <span class="string">"activated"</span>,
+                <span class="string">"licensedTo"</span>: <span class="string">"Your Company Name"</span>,
+                <span class="string">"tier"</span>: <span class="string">"Professional"</span>,
+                <span class="string">"modules"</span>: [<span class="string">"GL"</span>, <span
+                    class="string">"AR"</span>, <span class="string">"AP"</span>, <span
+                    class="string">"Inventory"</span>, <span class="string">"Sales"</span>, <span
+                    class="string">"Purchase"</span>, <span class="string">"CRM"</span>],
+                <span class="string">"updatesUntil"</span>: <span class="string">"2026-12-17"</span>,
+                <span class="string">"maxCompanies"</span>: 9,
+                <span class="string">"maxInstallations"</span>: 3
+                }
+            </div>
+
             <div class="highlight-box success">
-                <strong>Important:</strong> Keep your <code>license.lic</code> file safe! You'll need it if you reinstall or redeploy the API. The license is bound to your Machine ID.
+                <strong>Important:</strong> Keep your <code>license.lic</code> file safe! You'll need it if you
+                reinstall or redeploy the API. The license is bound to your Machine ID.
             </div>
         </div>
 
@@ -464,44 +485,49 @@ POST /api/v1/license/reload
         <div class="card">
             <h2>🚀 You're Ready to Build!</h2>
             <p>Once activated, explore the API documentation and start integrating:</p>
-            
+
             <div class="buttons">
                 <a href="https://evolution-api.akwasi.dev/docs" class="btn btn-primary">📚 API Documentation</a>
                 <a href="https://evolution-api.akwasi.dev/swagger" class="btn btn-outline">🔍 Swagger UI</a>
             </div>
-            
+
             <div class="highlight-box info" style="margin-top: 20px;">
-                <strong>Pro Tip:</strong> Start with the <code>/api/v1/companies</code> endpoint to list available Sage companies, then explore GL accounts with <code>/api/v1/gl/accounts</code>.
+                <strong>Pro Tip:</strong> Start with the <code>/api/v1/companies</code> endpoint to list available Sage
+                companies, then explore GL accounts with <code>/api/v1/gl/accounts</code>.
             </div>
         </div>
 
         <!-- FAQ -->
         <div class="card">
             <h2>❓ Frequently Asked Questions</h2>
-            
+
             <div class="faq-item">
                 <h4>How long until I receive my license key?</h4>
                 <p>Typically within a few hours during business hours (GMT). Maximum 24 hours.</p>
             </div>
-            
+
             <div class="faq-item">
                 <h4>Can I install on multiple machines?</h4>
-                <p><strong>Developer:</strong> 1 installation. <strong>Professional:</strong> Up to 3 installations. Need more? Contact us about Enterprise licensing.</p>
+                <p><strong>Developer:</strong> 1 installation. <strong>Professional:</strong> Up to 3 installations.
+                    Need more? Contact us about Enterprise licensing.</p>
             </div>
-            
+
             <div class="faq-item">
                 <h4>What if I change servers?</h4>
-                <p>Email us with your new Machine ID and we'll transfer your license. No charge for reasonable transfers.</p>
+                <p>Email us with your new Machine ID and we'll transfer your license. No charge for reasonable
+                    transfers.</p>
             </div>
-            
+
             <div class="faq-item">
                 <h4>What Sage Evolution versions are supported?</h4>
-                <p>We support Sage Evolution versions 7.x through the latest release. Check our docs for specific version compatibility.</p>
+                <p>We support Sage Evolution versions 7.x through the latest release. Check our docs for specific
+                    version compatibility.</p>
             </div>
-            
+
             <div class="faq-item">
                 <h4>Do I need to keep my updates subscription?</h4>
-                <p>No. Your perpetual license works forever. The updates subscription ($575/year) is only needed if you want new features or compatibility with future Sage versions.</p>
+                <p>No. Your perpetual license works forever. The updates subscription ($575/year) is only needed if you
+                    want new features or compatibility with future Sage versions.</p>
             </div>
         </div>
 
@@ -514,12 +540,12 @@ POST /api/v1/license/reload
             </p>
         </div>
     </div>
-    
+
     <footer>
         <p>© 2025 Adullam Solutions Company Limited. EvoConnect is a product of Adullam Solutions.</p>
         <p style="margin-top: 10px;">
-            <a href="https://evolution-api.akwasi.dev" style="color: #3498db;">Home</a> · 
-            <a href="https://evolution-api.akwasi.dev/docs" style="color: #3498db;">Documentation</a> · 
+            <a href="https://evolution-api.akwasi.dev" style="color: #3498db;">Home</a> ·
+            <a href="https://evolution-api.akwasi.dev/docs" style="color: #3498db;">Documentation</a> ·
             <a href="https://akwasi.dev" style="color: #3498db;">About</a>
         </p>
     </footer>
@@ -529,7 +555,7 @@ POST /api/v1/license/reload
         document.querySelectorAll('.code-block').forEach(block => {
             block.style.cursor = 'pointer';
             block.title = 'Click to copy';
-            block.addEventListener('click', function() {
+            block.addEventListener('click', function () {
                 const text = this.textContent;
                 navigator.clipboard.writeText(text).then(() => {
                     const original = this.style.outline;
