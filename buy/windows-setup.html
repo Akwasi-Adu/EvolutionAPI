@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows Setup - EvoConnect</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #0078D4 0%, #00BCF2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .breadcrumb {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb a {
+            color: #0078D4;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        
+        .card h2 {
+            color: #0078D4;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .card h3 {
+            color: #333;
+            margin: 25px 0 15px 0;
+            font-size: 1.1rem;
+        }
+        
+        .card p {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .card ul, .card ol {
+            margin: 15px 0 15px 25px;
+            color: #555;
+        }
+        
+        .card li {
+            margin-bottom: 8px;
+        }
+        
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .code-block .comment {
+            color: #6a9955;
+        }
+        
+        .code-block .keyword {
+            color: #569cd6;
+        }
+        
+        .code-block .string {
+            color: #ce9178;
+        }
+        
+        .code-block .number {
+            color: #b5cea8;
+        }
+        
+        .code-label {
+            background: #0078D4;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 4px 4px 0 0;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: -8px;
+            position: relative;
+            top: 8px;
+        }
+        
+        .highlight-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .highlight-box.info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+        
+        .highlight-box.success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .highlight-box.danger {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .step-indicator {
+            display: inline-block;
+            background: #0078D4;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .requirement-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .requirement-item h4 {
+            color: #0078D4;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .requirement-item p {
+            font-size: 0.85rem;
+            margin: 0;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+        
+        .copy-btn:hover {
+            background: #666;
+        }
+        
+        .toc {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .toc h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+        
+        .toc ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .toc li {
+            margin: 8px 0;
+        }
+        
+        .toc a {
+            color: #0078D4;
+            text-decoration: none;
+        }
+        
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .screenshot-placeholder {
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            padding: 40px;
+            text-align: center;
+            border-radius: 8px;
+            margin: 15px 0;
+            color: #6c757d;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: #0078D4;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .requirements-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>
+            <svg width="40" height="40" viewBox="0 0 23 23" fill="white">
+                <path d="M0 0h11v11H0zM12 0h11v11H12zM0 12h11v11H0zM12 12h11v11H12z"/>
+            </svg>
+            Windows Setup Guide
+        </h1>
+        <p>Deploy EvoConnect on IIS with ASP.NET Core Hosting Bundle</p>
+    </div>
+    
+    <div class="breadcrumb">
+        <a href="https://evolution-api.akwasi.dev">Home</a> → 
+        <a href="getting-started.html">Getting Started</a> → 
+        Windows Setup
+    </div>
+    
+    <div class="container">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>📋 On This Page</h3>
+            <ul>
+                <li><a href="#prerequisites">1. Prerequisites</a></li>
+                <li><a href="#install-hosting-bundle">2. Install .NET 9.0 Hosting Bundle</a></li>
+                <li><a href="#extract-files">3. Extract API Files</a></li>
+                <li><a href="#configure-iis">4. Configure IIS</a></li>
+                <li><a href="#configure-app">5. Configure Application Settings</a></li>
+                <li><a href="#test">6. Test the Installation</a></li>
+                <li><a href="#troubleshooting">7. Troubleshooting</a></li>
+            </ul>
+        </div>
+        
+        <!-- Prerequisites -->
+        <div class="card" id="prerequisites">
+            <h2><span class="step-indicator">1</span> Prerequisites</h2>
+            
+            <div class="requirements-grid">
+                <div class="requirement-item">
+                    <h4>Operating System</h4>
+                    <p>Windows Server 2016+ or Windows 10/11</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>IIS Version</h4>
+                    <p>IIS 10.0 or later</p>
+                </div>
+                <div class="requirement-item">
+                    <h4>SQL Server Access</h4>
+                    <p>Network access to Sage Evolution database server</p>
+                </div>
+                <div class="requirement-item">
+                    <h4">.NET Runtime</h4>
+                    <p>.NET 9.0 Hosting Bundle</p>
+                </div>
+            </div>
+            
+            <h3>Enable IIS (if not already enabled)</h3>
+            <p>If IIS is not installed, enable it via PowerShell (run as Administrator):</p>
+            
+            <div class="code-label">PowerShell (Admin)</div>
+            <div class="code-block">
+<span class="comment"># For Windows Server</span>
+Install-WindowsFeature -Name Web-Server -IncludeManagementTools
+
+<span class="comment"># For Windows 10/11</span>
+Enable-WindowsOptionalFeature -Online -FeatureName IIS-WebServerRole, IIS-WebServer, IIS-CommonHttpFeatures, IIS-HttpErrors, IIS-ApplicationDevelopment, IIS-NetFxExtensibility45, IIS-ASPNET45
+            </div>
+            
+            <p>Or enable via <strong>Control Panel → Programs → Turn Windows features on or off → Internet Information Services</strong>.</p>
+        </div>
+        
+        <!-- Install Hosting Bundle -->
+        <div class="card" id="install-hosting-bundle">
+            <h2><span class="step-indicator">2</span> Install .NET 9.0 Hosting Bundle</h2>
+            
+            <p>The ASP.NET Core Hosting Bundle includes the .NET Runtime and IIS support. This is <strong>required</strong> for running ASP.NET Core apps on IIS.</p>
+            
+            <div class="highlight-box info">
+                <strong>Download Link:</strong><br>
+                <a href="https://dotnet.microsoft.com/en-us/download/dotnet/9.0" target="_blank">https://dotnet.microsoft.com/en-us/download/dotnet/9.0</a><br><br>
+                Look for <strong>"Hosting Bundle"</strong> under the Windows section (not just the Runtime).
+            </div>
+            
+            <h3>Installation Steps:</h3>
+            <ol>
+                <li>Download the <strong>ASP.NET Core 9.0 Hosting Bundle</strong> installer</li>
+                <li>Run the installer as Administrator</li>
+                <li>Follow the installation wizard</li>
+                <li><strong>Important:</strong> Restart IIS after installation:
+                    <div class="code-label">Command Prompt (Admin)</div>
+                    <div class="code-block">
+net stop was /y
+net start w3svc
+                    </div>
+                </li>
+            </ol>
+            
+            <h3>Verify Installation:</h3>
+            <div class="code-label">Command Prompt</div>
+            <div class="code-block">
+dotnet --list-runtimes
+
+<span class="comment"># You should see something like:</span>
+<span class="comment"># Microsoft.AspNetCore.App 9.0.x [C:\Program Files\dotnet\shared\Microsoft.AspNetCore.App]</span>
+<span class="comment"># Microsoft.NETCore.App 9.0.x [C:\Program Files\dotnet\shared\Microsoft.NETCore.App]</span>
+            </div>
+        </div>
+        
+        <!-- Extract Files -->
+        <div class="card" id="extract-files">
+            <h2><span class="step-indicator">3</span> Extract API Files</h2>
+            
+            <p>Create a directory for the API and extract the downloaded ZIP file.</p>
+            
+            <h3>Recommended Location:</h3>
+            <div class="code-block">
+C:\inetpub\wwwroot\EvoConnect\
+            </div>
+            
+            <h3>Steps:</h3>
+            <ol>
+                <li>Create the folder: <code>C:\inetpub\wwwroot\EvoConnect</code></li>
+                <li>Extract <strong>Published.zip</strong> contents</li>
+                <li>Copy the contents of the <code>net9.0</code> folder to <code>C:\inetpub\wwwroot\EvoConnect\</code></li>
+            </ol>
+            
+            <p>Your folder structure should look like:</p>
+            <div class="code-block">
+C:\inetpub\wwwroot\EvoConnect\
+├── appsettings.json
+├── appsettings.Development.json
+├── EvolutionSDKAPIsimp.dll
+├── EvolutionSDKAPIsimp.exe
+├── EvolutionSDKAPIsimp.xml
+├── web.config                    <span class="comment">← Create this file (see below)</span>
+├── license.lic                   <span class="comment">← Add after receiving from support</span>
+└── [other DLLs and folders...]
+            </div>
+            
+            <h3>Create web.config File:</h3>
+            <p>Create a <code>web.config</code> file in the EvoConnect folder with this content:</p>
+            
+            <div class="code-label">web.config</div>
+            <div class="code-block">
+<span class="keyword">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+&lt;configuration&gt;
+  &lt;location path="." inheritInChildApplications="false"&gt;
+    &lt;system.webServer&gt;
+      &lt;handlers&gt;
+        &lt;add name="aspNetCore" path="*" verb="*" modules="AspNetCoreModuleV2" resourceType="Unspecified" /&gt;
+      &lt;/handlers&gt;
+      &lt;aspNetCore processPath="dotnet"
+                  arguments=".\EvolutionSDKAPIsimp.dll"
+                  stdoutLogEnabled="true"
+                  stdoutLogFile=".\logs\stdout"
+                  hostingModel="InProcess"&gt;
+        &lt;environmentVariables&gt;
+          &lt;environmentVariable name="ASPNETCORE_ENVIRONMENT" value="Production" /&gt;
+        &lt;/environmentVariables&gt;
+      &lt;/aspNetCore&gt;
+    &lt;/system.webServer&gt;
+  &lt;/location&gt;
+&lt;/configuration&gt;
+            </div>
+            
+            <div class="highlight-box">
+                <strong>Note:</strong> Create a <code>logs</code> folder in the EvoConnect directory for stdout logging. This helps with troubleshooting startup issues.
+            </div>
+        </div>
+        
+        <!-- Configure IIS -->
+        <div class="card" id="configure-iis">
+            <h2><span class="step-indicator">4</span> Configure IIS</h2>
+            
+            <h3>4.1 Create Application Pool</h3>
+            <ol>
+                <li>Open <strong>IIS Manager</strong> (run <code>inetmgr</code>)</li>
+                <li>Right-click <strong>Application Pools</strong> → <strong>Add Application Pool...</strong></li>
+                <li>Configure:
+                    <ul>
+                        <li><strong>Name:</strong> <code>EvoConnectPool</code></li>
+                        <li><strong>.NET CLR version:</strong> <code>No Managed Code</code></li>
+                        <li><strong>Managed pipeline mode:</strong> <code>Integrated</code></li>
+                    </ul>
+                </li>
+                <li>Click <strong>OK</strong></li>
+            </ol>
+            
+            <div class="highlight-box danger">
+                <strong>Critical:</strong> Set .NET CLR version to <strong>"No Managed Code"</strong>. ASP.NET Core runs its own .NET runtime and does not use the legacy .NET Framework CLR.
+            </div>
+            
+            <h3>4.2 Configure Application Pool Identity (for SQL Server)</h3>
+            <p>If your SQL Server uses Windows Authentication (Trusted Connection), configure the App Pool identity:</p>
+            <ol>
+                <li>Right-click <strong>EvoConnectPool</strong> → <strong>Advanced Settings...</strong></li>
+                <li>Under <strong>Process Model</strong> → <strong>Identity</strong></li>
+                <li>Click <strong>...</strong> and select:
+                    <ul>
+                        <li><strong>Custom account:</strong> Enter a domain account with SQL Server access</li>
+                        <li>Or use <strong>ApplicationPoolIdentity</strong> and grant SQL access to <code>IIS APPPOOL\EvoConnectPool</code></li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <h3>4.3 Create Website or Application</h3>
+            
+            <p><strong>Option A: Create as a new Website</strong> (recommended for dedicated server)</p>
+            <ol>
+                <li>Right-click <strong>Sites</strong> → <strong>Add Website...</strong></li>
+                <li>Configure:
+                    <ul>
+                        <li><strong>Site name:</strong> <code>EvoConnect</code></li>
+                        <li><strong>Application pool:</strong> <code>EvoConnectPool</code></li>
+                        <li><strong>Physical path:</strong> <code>C:\inetpub\wwwroot\EvoConnect</code></li>
+                        <li><strong>Binding:</strong> HTTP, Port 5000 (or your preferred port)</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <p><strong>Option B: Add as Application under Default Web Site</strong></p>
+            <ol>
+                <li>Right-click <strong>Default Web Site</strong> → <strong>Add Application...</strong></li>
+                <li>Configure:
+                    <ul>
+                        <li><strong>Alias:</strong> <code>evoconnect</code></li>
+                        <li><strong>Application pool:</strong> <code>EvoConnectPool</code></li>
+                        <li><strong>Physical path:</strong> <code>C:\inetpub\wwwroot\EvoConnect</code></li>
+                    </ul>
+                </li>
+                <li>Access at: <code>http://localhost/evoconnect</code></li>
+            </ol>
+            
+            <h3>4.4 Set Folder Permissions</h3>
+            <p>Grant the Application Pool identity permission to the folder:</p>
+            <ol>
+                <li>Right-click <code>C:\inetpub\wwwroot\EvoConnect</code> → <strong>Properties</strong></li>
+                <li>Go to <strong>Security</strong> tab → <strong>Edit</strong> → <strong>Add</strong></li>
+                <li>Enter: <code>IIS APPPOOL\EvoConnectPool</code></li>
+                <li>Grant <strong>Read & Execute</strong> permissions</li>
+                <li>For the <code>logs</code> folder, also grant <strong>Write</strong> permissions</li>
+            </ol>
+        </div>
+        
+        <!-- Configure App Settings -->
+        <div class="card" id="configure-app">
+            <h2><span class="step-indicator">5</span> Configure Application Settings</h2>
+            
+            <p>Edit <code>appsettings.json</code> to configure your Sage Evolution database connections and security settings.</p>
+            
+            <div class="code-label">appsettings.json</div>
+            <div class="code-block">
+{
+  <span class="string">"Logging"</span>: {
+    <span class="string">"LogLevel"</span>: {
+      <span class="string">"Default"</span>: <span class="string">"Information"</span>,
+      <span class="string">"Microsoft.AspNetCore"</span>: <span class="string">"Warning"</span>
+    }
+  },
+  <span class="string">"AllowedHosts"</span>: <span class="string">"*"</span>,
+  
+  <span class="comment">// CORS - Add your application domains</span>
+  <span class="string">"AllowedOrigins"</span>: [
+    <span class="string">"https://yourapplication.com"</span>,
+    <span class="string">"http://localhost:3000"</span>
+  ],
+  
+  <span class="comment">// JWT Configuration - CHANGE THESE VALUES!</span>
+  <span class="string">"Jwt"</span>: {
+    <span class="string">"Key"</span>: <span class="string">"your-super-secret-jwt-key-minimum-32-characters-long"</span>,
+    <span class="string">"Issuer"</span>: <span class="string">"EvoConnect"</span>,
+    <span class="string">"Audience"</span>: <span class="string">"EvoConnectClients"</span>,
+    <span class="string">"ExpirationInMinutes"</span>: <span class="number">60</span>
+  },
+  
+  <span class="comment">// API Keys for authentication</span>
+  <span class="string">"ApiKeys"</span>: [
+    <span class="string">"your-secure-api-key-here"</span>
+  ],
+  
+  <span class="comment">// Multi-Company Database Configuration</span>
+  <span class="string">"Companies"</span>: {
+    <span class="string">"company1"</span>: {
+      <span class="string">"DisplayName"</span>: <span class="string">"My Company Ltd"</span>,
+      <span class="string">"EvolutionDatabase"</span>: <span class="string">"Server=SQLSERVER;Database=Evolution_Company;Trusted_Connection=True;TrustServerCertificate=True;"</span>,
+      <span class="string">"EvolutionCommon"</span>: <span class="string">"Server=SQLSERVER;Database=SageCommon;Trusted_Connection=True;TrustServerCertificate=True;"</span>
+    }
+  },
+  
+  <span class="comment">// Default company to use</span>
+  <span class="string">"Evolution"</span>: {
+    <span class="string">"DefaultCompany"</span>: <span class="string">"company1"</span>,
+    <span class="string">"DefaultTimeout"</span>: <span class="number">30</span>,
+    <span class="string">"EnableTracing"</span>: <span class="keyword">false</span>,
+    <span class="string">"MaxRetryAttempts"</span>: <span class="number">3</span>
+  },
+  
+  <span class="comment">// Features</span>
+  <span class="string">"Features"</span>: {
+    <span class="string">"EnableSwagger"</span>: <span class="keyword">true</span>,
+    <span class="string">"EnableDetailedErrors"</span>: <span class="keyword">false</span>
+  }
+}
+            </div>
+            
+            <div class="highlight-box danger">
+                <strong>Security Warning:</strong> 
+                <ul style="margin-top: 10px; margin-bottom: 0;">
+                    <li>Change the default JWT Key to a unique, secure value (minimum 32 characters)</li>
+                    <li>Replace API keys with secure, randomly generated keys</li>
+                    <li>Set <code>EnableDetailedErrors</code> to <code>false</code> in production</li>
+                    <li>Restrict <code>AllowedOrigins</code> to only your application domains</li>
+                </ul>
+            </div>
+            
+            <h3>Connection String Options</h3>
+            <p><strong>Windows Authentication (Recommended):</strong></p>
+            <div class="code-block">
+<span class="string">"Server=SQLSERVER;Database=Evolution_DB;Trusted_Connection=True;TrustServerCertificate=True;"</span>
+            </div>
+            
+            <p><strong>SQL Server Authentication:</strong></p>
+            <div class="code-block">
+<span class="string">"Server=SQLSERVER;Database=Evolution_DB;User Id=sa;Password=YourPassword;TrustServerCertificate=True;"</span>
+            </div>
+        </div>
+        
+        <!-- Test Installation -->
+        <div class="card" id="test">
+            <h2><span class="step-indicator">6</span> Test the Installation</h2>
+            
+            <h3>6.1 Start the Website</h3>
+            <ol>
+                <li>In IIS Manager, select your site</li>
+                <li>Click <strong>Start</strong> in the Actions panel (if not already running)</li>
+            </ol>
+            
+            <h3>6.2 Test the API</h3>
+            <p>Open your browser and navigate to:</p>
+            
+            <div class="code-block">
+<span class="comment"># Swagger UI (if enabled)</span>
+http://localhost:5000/swagger
+
+<span class="comment"># Health check endpoint</span>
+http://localhost:5000/api/v1/health
+
+<span class="comment"># Get Machine ID for license activation</span>
+http://localhost:5000/api/v1/license/machine-id
+            </div>
+            
+            <div class="highlight-box success">
+                <strong>Success!</strong> If you see the Swagger UI or a JSON response, your installation is working. Continue to the <a href="https://evolution-api.akwasi.dev/getting-started#step-3">Getting Started guide</a> to activate your license.
+            </div>
+            
+            <h3>6.3 Activate Your License</h3>
+            <p>After receiving your <code>license.lic</code> file:</p>
+            <ol>
+                <li>Copy <code>license.lic</code> to <code>C:\inetpub\wwwroot\EvoConnect\</code></li>
+                <li>Call the reload endpoint or restart the Application Pool:
+                    <div class="code-block">
+<span class="comment"># Option 1: Reload via API</span>
+curl -X POST http://localhost:5000/api/v1/license/reload
+
+<span class="comment"># Option 2: Restart App Pool via PowerShell</span>
+Restart-WebAppPool -Name "EvoConnectPool"
+                    </div>
+                </li>
+            </ol>
+        </div>
+        
+        <!-- Troubleshooting -->
+        <div class="card" id="troubleshooting">
+            <h2><span class="step-indicator">7</span> Troubleshooting</h2>
+            
+            <h3>HTTP Error 500.19 - Invalid Configuration</h3>
+            <ul>
+                <li>Ensure the <strong>ASP.NET Core Hosting Bundle</strong> is installed</li>
+                <li>Restart IIS: <code>net stop was /y && net start w3svc</code></li>
+                <li>Check web.config syntax</li>
+            </ul>
+            
+            <h3>HTTP Error 502.5 - Process Failure</h3>
+            <ul>
+                <li>Check the <code>logs\stdout</code> files for detailed errors</li>
+                <li>Verify .NET 9.0 runtime is installed: <code>dotnet --list-runtimes</code></li>
+                <li>Try running the app directly: <code>dotnet EvolutionSDKAPIsimp.dll</code></li>
+            </ul>
+            
+            <h3>HTTP Error 500.30 - In-Process Handler Load Failure</h3>
+            <ul>
+                <li>Ensure Application Pool is set to <strong>"No Managed Code"</strong></li>
+                <li>Check that all required DLLs are present</li>
+                <li>Verify <code>hostingModel="InProcess"</code> in web.config</li>
+            </ul>
+            
+            <h3>Cannot Connect to SQL Server</h3>
+            <ul>
+                <li>Verify SQL Server is accessible from the web server</li>
+                <li>Check connection string in appsettings.json</li>
+                <li>If using Windows Auth, ensure App Pool identity has SQL access</li>
+                <li>Test connection using SQL Server Management Studio from the web server</li>
+            </ul>
+            
+            <h3>CORS Errors</h3>
+            <ul>
+                <li>Add your application domain to <code>AllowedOrigins</code> in appsettings.json</li>
+                <li>Restart the Application Pool after changes</li>
+            </ul>
+            
+            <h3>View Detailed Logs</h3>
+            <p>Enable stdout logging in web.config:</p>
+            <div class="code-block">
+<span class="keyword">stdoutLogEnabled="true"</span>
+<span class="keyword">stdoutLogFile=".\logs\stdout"</span>
+            </div>
+            <p>Then check <code>C:\inetpub\wwwroot\EvoConnect\logs\</code> for log files.</p>
+            
+            <div class="highlight-box info">
+                <strong>Still stuck?</strong> Email <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a> with:
+                <ul style="margin-top: 10px; margin-bottom: 0;">
+                    <li>The error message or screenshot</li>
+                    <li>Contents of stdout log files</li>
+                    <li>Your Windows/IIS version</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Next Steps -->
+        <div class="card">
+            <h2>🚀 Next Steps</h2>
+            <p>Your EvoConnect API is now running on Windows! Here's what to do next:</p>
+            <ol>
+                <li><a href="getting-started.html#step-3">Get your Machine ID</a> and request license</li>
+                <li>Explore the <a href="../docs.html">API Documentation</a></li>
+                <li>Consider setting up <strong>HTTPS</strong> with an SSL certificate</li>
+                <li>Configure <strong>Windows Firewall</strong> if accessing from other machines</li>
+            </ol>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Adullam Solutions Company Limited. EvoConnect is a product of Adullam Solutions.</p>
+        <p style="margin-top: 10px;">
+            <a href="https://evolution-api.akwasi.dev">Home</a> · 
+            <a href="getting-started.html">Getting Started</a> · 
+            <a href=".../docs.html">Documentation</a>
+        </p>
+    </footer>
+</body>
+</html>

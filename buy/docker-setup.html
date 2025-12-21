@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Setup - EvoConnect</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; }
+        .header { background: linear-gradient(135deg, #0db7ed 0%, #384d54 100%); color: white; padding: 40px 20px; text-align: center; }
+        .header h1 { font-size: 2rem; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.9; }
+        .breadcrumb { max-width: 900px; margin: 20px auto; padding: 0 20px; font-size: 0.9rem; }
+        .breadcrumb a { color: #0db7ed; text-decoration: none; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .card { background: white; border-radius: 12px; padding: 30px; margin-bottom: 25px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); }
+        .card h2 { color: #0db7ed; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #f0f0f0; }
+        .card h3 { color: #333; margin: 25px 0 15px 0; font-size: 1.1rem; }
+        .card p { margin-bottom: 15px; color: #555; }
+        .card ul, .card ol { margin: 15px 0 15px 25px; color: #555; }
+        .card li { margin-bottom: 8px; }
+        .code-block { background: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; font-family: 'Consolas', monospace; font-size: 0.85rem; overflow-x: auto; margin: 15px 0; white-space: pre; }
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #569cd6; }
+        .code-block .string { color: #ce9178; }
+        .code-label { background: #0db7ed; color: white; padding: 3px 10px; border-radius: 4px 4px 0 0; font-size: 0.75rem; font-weight: 600; display: inline-block; margin-bottom: -8px; position: relative; top: 8px; }
+        .highlight-box { background: #fff3cd; border-left: 4px solid #ffc107; padding: 15px 20px; margin: 20px 0; border-radius: 0 8px 8px 0; }
+        .highlight-box.info { background: #d1ecf1; border-left-color: #17a2b8; }
+        .highlight-box.success { background: #d4edda; border-left-color: #28a745; }
+        .highlight-box.danger { background: #f8d7da; border-left-color: #dc3545; }
+        .step-indicator { display: inline-block; background: #0db7ed; color: white; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; font-weight: bold; margin-right: 10px; font-size: 0.9rem; }
+        .toc { background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .toc h3 { margin: 0 0 15px 0; color: #333; }
+        .toc ul { list-style: none; margin: 0; padding: 0; }
+        .toc li { margin: 8px 0; }
+        .toc a { color: #0db7ed; text-decoration: none; }
+        footer { text-align: center; padding: 30px 20px; color: #666; font-size: 0.9rem; }
+        footer a { color: #0db7ed; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🐳 Docker Setup Guide</h1>
+        <p>Deploy EvoConnect in containers with Docker and Docker Compose</p>
+    </div>
+    
+    <div class="breadcrumb">
+        <a href="https://evolution-api.akwasi.dev">Home</a> → 
+        <a href="getting-started.html">Getting Started</a> → 
+        Docker Setup
+    </div>
+    
+    <div class="container">
+        <div class="toc">
+            <h3>📋 On This Page</h3>
+            <ul>
+                <li><a href="#prerequisites">1. Prerequisites</a></li>
+                <li><a href="#prepare">2. Prepare Files</a></li>
+                <li><a href="#dockerfile">3. Create Dockerfile</a></li>
+                <li><a href="#compose">4. Docker Compose Setup</a></li>
+                <li><a href="#configure">5. Configure Application</a></li>
+                <li><a href="#run">6. Build and Run</a></li>
+                <li><a href="#manage">7. Container Management</a></li>
+                <li><a href="#troubleshoot">8. Troubleshooting</a></li>
+            </ul>
+        </div>
+
+        <div class="card" id="prerequisites">
+            <h2><span class="step-indicator">1</span> Prerequisites</h2>
+            <ul>
+                <li><strong>Docker Engine:</strong> Version 20.10 or later</li>
+                <li><strong>Docker Compose:</strong> V2 (included with Docker Desktop)</li>
+                <li><strong>Network Access:</strong> To your Sage Evolution SQL Server</li>
+                <li><strong>Disk Space:</strong> ~500MB for image and container</li>
+            </ul>
+            
+            <h3>Install Docker (Linux)</h3>
+            <div class="code-label">Terminal</div>
+            <div class="code-block"><span class="comment"># Install Docker</span>
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+
+<span class="comment"># Add user to docker group</span>
+sudo usermod -aG docker $USER
+
+<span class="comment"># Verify</span>
+docker --version
+docker compose version</div>
+            
+            <p><strong>Windows/macOS:</strong> Install <a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop</a></p>
+        </div>
+
+        <div class="card" id="prepare">
+            <h2><span class="step-indicator">2</span> Prepare Files</h2>
+            <div class="code-label">Terminal</div>
+            <div class="code-block"><span class="comment"># Create project directory</span>
+mkdir ~/evoconnect-docker
+cd ~/evoconnect-docker
+
+<span class="comment"># Extract Published.zip and rename</span>
+unzip Published.zip
+mv net9.0 app
+
+<span class="comment"># Create directories</span>
+mkdir config logs</div>
+
+            <p>Final structure:</p>
+            <div class="code-block">evoconnect-docker/
+├── app/                    <span class="comment"># Extracted API files</span>
+│   ├── EvolutionSDKAPIsimp.dll
+│   ├── appsettings.json
+│   └── ...
+├── config/
+│   └── appsettings.Production.json  <span class="comment"># Your config overrides</span>
+├── logs/                   <span class="comment"># Log files (mounted)</span>
+├── Dockerfile
+├── docker-compose.yml
+└── license.lic             <span class="comment"># Add after receiving</span></div>
+        </div>
+
+        <div class="card" id="dockerfile">
+            <h2><span class="step-indicator">3</span> Create Dockerfile</h2>
+            <p>Create a file named <code>Dockerfile</code> (no extension):</p>
+            
+            <div class="code-label">Dockerfile</div>
+            <div class="code-block"><span class="comment"># Use official ASP.NET Core 9.0 runtime</span>
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
+
+<span class="comment"># Set working directory</span>
+WORKDIR /app
+
+<span class="comment"># Create non-root user for security</span>
+RUN adduser --disabled-password --gecos "" appuser
+
+<span class="comment"># Copy application files</span>
+COPY app/ .
+
+<span class="comment"># Create logs directory and set permissions</span>
+RUN mkdir -p /app/logs &amp;&amp; chown -R appuser:appuser /app
+
+<span class="comment"># Switch to non-root user</span>
+USER appuser
+
+<span class="comment"># Expose port (internal)</span>
+EXPOSE 8080
+
+<span class="comment"># Environment variables</span>
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:8080
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+
+<span class="comment"># Health check</span>
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/api/v1/health || exit 1
+
+<span class="comment"># Start the application</span>
+ENTRYPOINT ["dotnet", "EvolutionSDKAPIsimp.dll"]</div>
+        </div>
+
+        <div class="card" id="compose">
+            <h2><span class="step-indicator">4</span> Docker Compose Setup</h2>
+            <p>Create <code>docker-compose.yml</code> for easier management:</p>
+            
+            <div class="code-label">docker-compose.yml</div>
+            <div class="code-block">version: '3.8'
+
+services:
+  evoconnect:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: evoconnect-api
+    restart: unless-stopped
+    ports:
+      - "5000:8080"
+    volumes:
+      <span class="comment"># Mount configuration overrides</span>
+      - ./config/appsettings.Production.json:/app/appsettings.Production.json:ro
+      <span class="comment"># Mount license file</span>
+      - ./license.lic:/app/license.lic:ro
+      <span class="comment"># Mount logs directory for persistence</span>
+      - ./logs:/app/logs
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - TZ=Africa/Accra
+    networks:
+      - evoconnect-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+networks:
+  evoconnect-network:
+    driver: bridge</div>
+
+            <div class="highlight-box info">
+                <strong>Volume Mounts Explained:</strong>
+                <ul style="margin-top: 10px; margin-bottom: 0;">
+                    <li><code>config/appsettings.Production.json</code> - Your custom settings (overrides defaults)</li>
+                    <li><code>license.lic</code> - Your license file (add after receiving)</li>
+                    <li><code>logs/</code> - Persists log files outside container</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card" id="configure">
+            <h2><span class="step-indicator">5</span> Configure Application</h2>
+            <p>Create <code>config/appsettings.Production.json</code> with your settings:</p>
+            
+            <div class="code-label">config/appsettings.Production.json</div>
+            <div class="code-block">{
+  "AllowedOrigins": [
+    "https://yourapplication.com"
+  ],
+  
+  "Jwt": {
+    "Key": "<span class="string">your-super-secret-jwt-key-minimum-32-chars</span>",
+    "Issuer": "EvoConnect",
+    "Audience": "EvoConnectClients",
+    "ExpirationInMinutes": 60
+  },
+  
+  "ApiKeys": [
+    "<span class="string">your-secure-api-key-here</span>"
+  ],
+  
+  "Companies": {
+    "company1": {
+      "DisplayName": "My Company Ltd",
+      "EvolutionDatabase": "<span class="string">Server=192.168.1.100;Database=Evolution_Company;User Id=sa;Password=YourPassword;TrustServerCertificate=True;</span>",
+      "EvolutionCommon": "<span class="string">Server=192.168.1.100;Database=SageCommon;User Id=sa;Password=YourPassword;TrustServerCertificate=True;</span>"
+    }
+  },
+  
+  "Evolution": {
+    "DefaultCompany": "company1"
+  },
+  
+  "Features": {
+    "EnableSwagger": true,
+    "EnableDetailedErrors": false
+  }
+}</div>
+
+            <div class="highlight-box danger">
+                <strong>Security Notes:</strong>
+                <ul style="margin-top: 10px; margin-bottom: 0;">
+                    <li>Use SQL Server Authentication (User Id/Password) from Docker containers</li>
+                    <li>Change JWT Key and API Keys to secure values</li>
+                    <li>Set <code>EnableDetailedErrors</code> to <code>false</code> in production</li>
+                </ul>
+            </div>
+            
+            <h3>SQL Server Network Access</h3>
+            <p>The container needs network access to your SQL Server. Options:</p>
+            <ul>
+                <li><strong>Same host:</strong> Use <code>host.docker.internal</code> (Docker Desktop) or host IP</li>
+                <li><strong>Remote server:</strong> Use the server IP address</li>
+                <li><strong>Docker network:</strong> If SQL Server is also in Docker, use container name</li>
+            </ul>
+        </div>
+
+        <div class="card" id="run">
+            <h2><span class="step-indicator">6</span> Build and Run</h2>
+            
+            <h3>Build the Image</h3>
+            <div class="code-label">Terminal</div>
+            <div class="code-block">cd ~/evoconnect-docker
+
+<span class="comment"># Build the Docker image</span>
+docker compose build
+
+<span class="comment"># Or with no cache (for rebuilds)</span>
+docker compose build --no-cache</div>
+
+            <h3>Start the Container</h3>
+            <div class="code-block"><span class="comment"># Start in detached mode</span>
+docker compose up -d
+
+<span class="comment"># View logs</span>
+docker compose logs -f
+
+<span class="comment"># Check status</span>
+docker compose ps</div>
+
+            <h3>Test the API</h3>
+            <div class="code-block"><span class="comment"># Get Machine ID</span>
+curl http://localhost:5000/api/v1/license/machine-id
+
+<span class="comment"># Check health</span>
+curl http://localhost:5000/api/v1/health
+
+<span class="comment"># Open Swagger UI in browser</span>
+<span class="comment"># http://localhost:5000/swagger</span></div>
+
+            <div class="highlight-box success">
+                <strong>Success!</strong> Copy your Machine ID and <a href="getting-started.html#step-4">request your license</a>.
+            </div>
+            
+            <h3>Add License File</h3>
+            <p>After receiving your <code>license.lic</code> file:</p>
+            <div class="code-block"><span class="comment"># Copy license to project directory</span>
+cp license.lic ~/evoconnect-docker/
+
+<span class="comment"># Restart container to load license</span>
+docker compose restart
+
+<span class="comment"># Or reload without restart</span>
+curl -X POST http://localhost:5000/api/v1/license/reload</div>
+        </div>
+
+        <div class="card" id="manage">
+            <h2><span class="step-indicator">7</span> Container Management</h2>
+            
+            <h3>Common Commands</h3>
+            <div class="code-block"><span class="comment"># Start containers</span>
+docker compose up -d
+
+<span class="comment"># Stop containers</span>
+docker compose down
+
+<span class="comment"># Restart containers</span>
+docker compose restart
+
+<span class="comment"># View logs (follow)</span>
+docker compose logs -f evoconnect
+
+<span class="comment"># View last 100 log lines</span>
+docker compose logs --tail=100 evoconnect
+
+<span class="comment"># Execute command in container</span>
+docker compose exec evoconnect /bin/bash
+
+<span class="comment"># Check container health</span>
+docker inspect --format='{{.State.Health.Status}}' evoconnect-api</div>
+
+            <h3>Update the Application</h3>
+            <div class="code-block"><span class="comment"># Replace app/ files with new version</span>
+rm -rf app/
+unzip NewPublished.zip
+mv net9.0 app
+
+<span class="comment"># Rebuild and restart</span>
+docker compose build --no-cache
+docker compose up -d</div>
+
+            <h3>Backup Configuration</h3>
+            <div class="code-block"><span class="comment"># Backup config and license</span>
+tar -czvf evoconnect-backup.tar.gz config/ license.lic docker-compose.yml Dockerfile</div>
+        </div>
+
+        <div class="card" id="troubleshoot">
+            <h2><span class="step-indicator">8</span> Troubleshooting</h2>
+            
+            <h3>Container Won't Start</h3>
+            <div class="code-block"><span class="comment"># Check logs for errors</span>
+docker compose logs evoconnect
+
+<span class="comment"># Check if port is in use</span>
+sudo lsof -i :5000
+
+<span class="comment"># Run interactively to see errors</span>
+docker compose run --rm evoconnect</div>
+
+            <h3>Cannot Connect to SQL Server</h3>
+            <ul>
+                <li>Verify SQL Server IP is reachable from container</li>
+                <li>Check SQL Server allows TCP/IP connections on port 1433</li>
+                <li>Ensure Windows Firewall allows inbound connections</li>
+                <li>Test from inside container:
+                    <div class="code-block">docker compose exec evoconnect apt-get update &amp;&amp; apt-get install -y netcat-openbsd
+docker compose exec evoconnect nc -zv 192.168.1.100 1433</div>
+                </li>
+            </ul>
+
+            <h3>License Not Loading</h3>
+            <ul>
+                <li>Verify <code>license.lic</code> exists in project directory</li>
+                <li>Check volume mount in docker-compose.yml</li>
+                <li>Verify file permissions</li>
+                <li>Check logs: <code>docker compose logs evoconnect | grep -i license</code></li>
+            </ul>
+
+            <h3>View Application Logs</h3>
+            <div class="code-block"><span class="comment"># Real-time logs</span>
+docker compose logs -f evoconnect
+
+<span class="comment"># Logs from file mount</span>
+ls -la ~/evoconnect-docker/logs/
+cat ~/evoconnect-docker/logs/*.log</div>
+
+            <div class="highlight-box info">
+                <strong>Need help?</strong> Email <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a> with:
+                <ul style="margin-top: 10px; margin-bottom: 0;">
+                    <li>Output of <code>docker compose logs evoconnect</code></li>
+                    <li>Your docker-compose.yml (remove sensitive data)</li>
+                    <li>Docker version: <code>docker --version</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🚀 Next Steps</h2>
+            <ol>
+                <li><a href="getting-started.html#step-3">Get your Machine ID</a> and request license</li>
+                <li>Explore the <a href="../docs.html">API Documentation</a></li>
+                <li>Set up a reverse proxy (Nginx/Traefik) for HTTPS</li>
+                <li>Configure Docker logging driver for production</li>
+                <li>Consider container orchestration (Docker Swarm/Kubernetes) for HA</li>
+            </ol>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Adullam Solutions Company Limited. EvoConnect is a product of Adullam Solutions.</p>
+        <p style="margin-top: 10px;">
+            <a href="https://evolution-api.akwasi.dev">Home</a> · 
+            <a href="getting-started.html">Getting Started</a> · 
+            <a href=".../docs.html">Documentation</a>
+        </p>
+    </footer>
+</body>
+</html>
