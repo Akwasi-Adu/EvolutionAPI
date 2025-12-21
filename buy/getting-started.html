@@ -344,13 +344,16 @@
         <!-- Step 1: Download -->
         <div class="card">
             <h2><span class="step-number">1</span> Download Your Installer</h2>
-            <p>Your download should have started automatically from Selar. If not, check your email for the download link.</p>
+            <p>Your download should have started automatically from Selar. If not, you can use the download link below.</p>
             
             <div class="highlight-box info">
                 <strong>Didn't receive the download?</strong><br>
-                Check your spam folder for an email from Selar. If still missing, email us at 
-                <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a>  with your order confirmation.
+                Click on the link below: <br />
+                <a href="">EvoConnect Ver 2025.12.001</a>  
             </div>
+
+            <p>For non-subscription clients who want to download older versions of the API, use the link below:<br />
+            <a href="previous-versions.html">Download Previous EvoConnect Versions</a></p>
         </div>
 
         <!-- Step 2: Install -->
@@ -507,7 +510,7 @@ POST /api/v1/license/reload
             <h3>Need Help?</h3>
             <p>I personally respond to every support request.</p>
             <p style="margin-top: 15px; font-size: 1.2rem;">
-                📧 <a href="/cdn-cgi/l/email-protection#e5969095958a9791a5848e9284968ccb818093"><span class="__cf_email__" data-cfemail="8ffcfaffffe0fdfbcfeee4f8eefce6a1ebeaf9">[email&#160;protected]</span></a>
+                📧 <a href="mailto:support@akwasi.dev">support&#64;akwasi&#46;dev</a>
             </p>
         </div>
     </div>
@@ -521,5 +524,18 @@ POST /api/v1/license/reload
         </p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Optional: Add co
+    <script>
+        // Copy functionality for code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.style.cursor = 'pointer';
+            block.title = 'Click to copy';
+            block.addEventListener('click', function() {
+                const text = this.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    const original = this.style.outline;
+                    this.style.outline = '2px solid #27ae60';
+                    setTimeout(() => this.style.outline = original, 500);
+                });
+            });
+        });
+    </script>
