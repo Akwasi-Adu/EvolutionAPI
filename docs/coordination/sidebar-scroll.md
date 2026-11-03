@@ -4,7 +4,7 @@
 - Repository/worktree: `C:\Users\Akwas\Documents\EVOAPI PROJECT\GEM-HIS` (`akwasi-adu/evolutionapi`).
 - Branch: `codex/docs-sidebar-scroll`.
 - Base: `b83c34b8a15e2a0497f9bd38dcc57c8ee49caf2a` (`origin/main`, fetched 2026-11-03).
-- Completed implementation commit: `6cbf4eb1ae3c3aeca677dddc7c19e39b56441a76` (`fix(docs): make endpoint sidebar scroll independently`). This ledger is recorded in a separate documentation commit.
+- Completed commits: `6cbf4eb1ae3c3aeca677dddc7c19e39b56441a76` (`fix(docs): make endpoint sidebar scroll independently`) and `05d2d09e754e89c528870392948912320bde0ccd` (`docs: record sidebar baseline and verification`). Publication status is recorded in the subsequent ledger commit.
 - Scope: Sidebar layout in `docs.html`; this coordination document. No API schema, homepage, pricing, or download changes.
 - Migrations: None.
 
@@ -40,7 +40,7 @@
 
 ## Remaining work and authorization
 
-- Implementation and local verification are complete. Feature-branch publication is in progress.
-- Remaining work: Push the reviewed implementation and coordination commits. PR creation and merge approval were requested separately; if approved, merge through a PR and verify the GitHub Pages deployment and live sidebar. Otherwise stop after the feature-branch push and record that the live site is unchanged.
+- Implementation, local verification, and feature-branch publication are complete. Pushed `codex/docs-sidebar-scroll` to origin and confirmed remote HEAD equals `05d2d09e754e89c528870392948912320bde0ccd` before recording this publication update. Final checkout was clean. No branch CI runs exist; GitHub Pages still publishes the unchanged `main`.
+- Remaining work: PR creation and merge approval were requested separately and remain pending. If approved, refresh the target, inspect the full outgoing range, create the prepared PR, merge after applicable checks, and verify the GitHub Pages deployment and live sidebar. Prepared PR body: `C:\Users\Akwas\AppData\Local\Temp\evoconnect-sidebar-20261103-adzrxsen\pr-body.md`. No PR has been created and the live site is unchanged.
 - Authorized: Discard prior unpublished edits in this repository; implement and locally verify sidebar scrolling on the live baseline; commit and push the feature branch (user's "proceed" on 2026-11-03).
 - Not yet authorized: PR creation/merge and publication to `main` (separate question pending). Changes to other repositories, force-pushes, and repository protection changes remain outside scope.
