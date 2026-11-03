@@ -76,6 +76,7 @@
         .logo-area {
             padding: 20px 20px 10px 20px;
             border-bottom: 1px solid transparent;
+            flex-shrink: 0;
         }
 
         .back-link {
@@ -112,10 +113,19 @@
             margin-top: 4px;
         }
 
+        #sidebarContent {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
+        }
+
         .search-area {
             padding: 15px 20px;
             border-bottom: 1px solid var(--border);
             position: relative;
+            flex-shrink: 0;
         }
 
         #searchInput {
@@ -160,7 +170,9 @@
 
         .nav-scroll {
             flex: 1;
+            min-height: 0;
             overflow-y: auto;
+            overscroll-behavior-y: contain;
             padding: 10px 0;
         }
 
@@ -517,8 +529,8 @@
             aside {
                 width: 100%;
                 height: auto;
-                max-height: none;
-                /* Remove limit */
+                max-height: 100vh;
+                max-height: 100dvh;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
                 position: sticky;
@@ -538,10 +550,9 @@
 
             /* 3. Show Content when Open */
             aside.open #sidebarContent {
-                display: block;
+                display: flex;
                 height: 80vh;
                 /* Take up most of screen when open */
-                overflow-y: auto;
             }
 
             /* 4. Style the Toggle Button */
